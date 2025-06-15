@@ -89,7 +89,7 @@ public class Trabajo {
 	
 	public Trabajo(String titulo,String detalle, Usuario usuario, Categoria categoria) {
 	this.detalle = detalle;
-	this.detalle = titulo;
+	this.titulo = titulo;
 	this.usuario = usuario;
 	this.categoria = categoria;
 	}

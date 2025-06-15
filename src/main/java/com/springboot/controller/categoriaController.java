@@ -64,4 +64,7 @@ public class categoriaController {
 		categoService.save(cate);
 		return new ResponseEntity(new Mensaje("Producto Actualizado"), HttpStatus.OK);
 	}
+	
+
+
 }

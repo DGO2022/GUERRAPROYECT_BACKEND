@@ -52,8 +52,8 @@ public class trabajoController {
 		List<Trabajo> listartrabajo = trabaService.listar();
 		return new ResponseEntity<List<Trabajo>>(listartrabajo, HttpStatus.OK);
 	}
-
-	@DeleteMapping("/borrar/{id_trabajo}")
+//BORRAR TRABAJO ANTIGUO, AUUN FUNCIONA
+	/*@DeleteMapping("/borrar/{id_trabajo}")
 	public ResponseEntity<?> delete(@PathVariable("id_trabajo") long id_trabajo) {
 		if (!trabaService.existsById(id_trabajo)) {
 			return new ResponseEntity(new Mensaje("Trabajo a eliminar no existe"), HttpStatus.BAD_REQUEST);
@@ -61,7 +61,7 @@ public class trabajoController {
 			trabaService.delete(id_trabajo);
 			return new ResponseEntity(new Mensaje("Trabajo eliminada"), HttpStatus.OK);
 		}
-	}
+	}*/
 
 	/*@PostMapping(value = "/crear", consumes = "multipart/form-data")
 	public ResponseEntity<?> create(
@@ -183,10 +183,15 @@ public class trabajoController {
 
 
 
+//buscador de trabajo por nombre 
+	@GetMapping("/buscar")
+	public ResponseEntity<List<Trabajo>> buscar(@RequestParam("keyword") String keyword) {
+	    List<Trabajo> resultados = trabaService.buscarPorPalabraClave(keyword);
+	    return new ResponseEntity<>(resultados, HttpStatus.OK);
+	}
 
 
-
-
+	//Actualizar trabajo
 	@PutMapping("/update/{id_trabajo}")
 	public ResponseEntity<?> update(@PathVariable("id_trabajo") Long id_trabajo, @RequestBody trabajoDto trabaDto) {
 		if (!trabaService.existsById(id_trabajo)) {
@@ -202,4 +207,31 @@ public class trabajoController {
 		trabaService.save(trabaj);
 		return new ResponseEntity(new Mensaje("Producto Actualizado"), HttpStatus.OK);
 	}
+	
+/*
+	//METODO DE FUNCIONALIDAD DE FILTROS
+		@GetMapping("/categoria/{id_categoria}")
+		public ResponseEntity<List<Trabajo>> listarPorCategoria(@PathVariable("id_categoria") Long id_categoria) {
+		    List<Trabajo> trabajosPorCategoria = trabaService.listarPorCategoria(id_categoria);
+		    return new ResponseEntity<>(trabajosPorCategoria, HttpStatus.OK);
+		}*/
+
+	
+	
+	// Método para eliminar un trabajo por su ID 
+	 @DeleteMapping("/eliminar/{id}")
+	 public ResponseEntity<Void> eliminarTrabajo(@PathVariable Long id) {
+	     boolean eliminado = trabaService.eliminarTrabajo(id);
+	     if (eliminado) {
+	         return ResponseEntity.noContent().build(); // 204 No Content: Trabajo eliminado correctamente
+	     } else {
+	         return ResponseEntity.notFound().build(); // 404 Not Found: Trabajo no encontrado
+	     }
+	 }
+    
+   
+    
+
+
+
 }

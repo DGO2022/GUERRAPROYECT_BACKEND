@@ -70,4 +70,28 @@ public class trabajoService {
 		}
         return trabajo;
     }*/
+	
+	public List<Trabajo> buscarPorPalabraClave(String keyword) {
+	    return trabaRepository.findByKeyword(keyword);
+	}
+	/*
+	//LISTAR POR CATEGORIA DE TRABAJO
+	public List<Trabajo> listarPorCategoria(Long id_categoria) {
+	    return trabaRepository.findByCategoria_id_categoria(id_categoria);
+	}*/
+	
+	// Método para eliminar un trabajo por su ID
+    
+    
+	public boolean eliminarTrabajo(Long id) {
+	    if (trabaRepository.existsById(id)) {
+	        trabaRepository.deleteById(id);
+	        return true; // Retorna true si la eliminación es exitosa
+	    } else {
+	        return false; // Retorna false si no se encuentra el trabajo
+	    }
+	}
+
+
+
 }

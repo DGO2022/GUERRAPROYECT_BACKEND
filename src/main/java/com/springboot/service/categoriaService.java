@@ -40,5 +40,6 @@ public class categoriaService {
 	public boolean existsById(long id) {
 		return cateRepository.existsById(id);
 	}
-        
+       
+	
 }
